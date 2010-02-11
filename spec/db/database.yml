@@ -1,0 +1,3 @@
+sqlite3:
+  :adapter: sqlite3
+  :database: vendor/plugins/protected_parent/spec/db/protected_parent.sqlite3.db
