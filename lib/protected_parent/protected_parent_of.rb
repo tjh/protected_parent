@@ -20,7 +20,7 @@ module ProtectedParent
     def removable?
       self.class.children_of_protected_parent.each do |child|                     # Loop through all the children 
         if a_plural child
-          return false if send("#{child}").count > 0                              # For plural children, see if there's at least 1
+          return false if send("#{child}").size > 0                               # For plural children, see if there's at least 1
         else
           return false unless send("#{child}").nil?                               # For singular children, make sure it's not nil
         end
