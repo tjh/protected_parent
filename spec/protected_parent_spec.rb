@@ -43,6 +43,16 @@ describe "ProtectedParent" do
     end
   end
   
+  describe "protected? method" do
+    it "should return the opposite of removable?" do
+      category = Category.create
+      category.removable?.should == !category.protected?
+      
+      category = Category.create
+      category.posts << Post.new
+      category.removable?.should == !category.protected?
+    end
+  end
   describe "has an instance with a single 'has_one' child" do
     it "should allow delete if the instance doesn't have a child assigned" do
       category = Category.create

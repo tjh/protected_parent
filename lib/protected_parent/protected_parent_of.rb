@@ -17,6 +17,7 @@ module ProtectedParent
   end
   
   module InstanceMethods
+    # Can the instance be deleted?
     def removable?
       self.class.children_of_protected_parent.each do |child|                     # Loop through all the children 
         if a_plural child
@@ -26,6 +27,11 @@ module ProtectedParent
         end
       end
       true
+    end
+    
+    # The invense of removable?, is this instance protected from deletion?
+    def protected?
+      !removable?
     end
     
     def a_plural(child)
