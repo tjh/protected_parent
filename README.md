@@ -10,15 +10,33 @@ Example Usage
 
 The model 'has_many :posts'. Do not allow deletion if there are Post records associated with this object:
     
-    protected_parent_of :posts
+    class Category < ActiveRecord::Base
+      protected_parent_of :posts
+    end
     
 If it 'has_one :attachement', don't allow deletion until the attachment has been removed. Use the singular, just like the 'has_one'
     
-    protected_parent_of :attachment
+    class Category < ActiveRecord::Base
+      protected_parent_of :attachment
+    end
     
 If necessary, allow several child objects to stay deletion. For example, a polymorphic category model may have:
     
-    protected_parent_of :posts, :comments
+    class Category < ActiveRecord::Base
+      protected_parent_of :posts, :comments
+    end
+    
+Depending on taste, you can call protected_parent_of multiple times:
+    
+    class Category < ActiveRecord::Base
+      has_many :posts
+      has_many :comments
+      protected_parent_of :posts, :comments
+      
+      has_one :attachment
+      protected_parent_of :attachment
+    end
+    
 
 License
 -------

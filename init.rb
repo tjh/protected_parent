@@ -1,1 +1,1 @@
-ActiveRecord::Base.class_eval { include ProtectedParent }
+require 'protected_parent'

@@ -42,4 +42,17 @@ describe "ProtectedParent" do
       category.removable?.should == false
     end
   end
+  
+  describe "has an instance with a single 'has_one' child" do
+    it "should allow delete if the instance doesn't have a child assigned" do
+      category = Category.create
+      lambda { category.destroy }.should change{ Category.count }
+    end
+    
+    it "should block the delete if the instance has a child assigned" do
+      category = Category.create
+      category.attachment = Attachment.new
+      lambda { category.destroy }.should_not change{ Category.count }
+    end
+  end
 end
