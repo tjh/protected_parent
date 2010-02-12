@@ -16,4 +16,30 @@ describe "ProtectedParent" do
       lambda { category.destroy }.should_not change{ Category.count }
     end
   end
+  
+  describe "removable? method" do
+    it "should return true when there are no children for the instance" do
+      category = Category.create
+      category.removable?.should == true
+    end
+    
+    it "should be false when the instance has only the firs of the two defined child record types" do
+      category = Category.create
+      category.posts << Post.new
+      category.removable?.should == false
+    end
+    
+    it "should be false when the instance has only the firs of the two defined child record types" do
+      category = Category.create
+      category.comments << Comment.new
+      category.removable?.should == false
+    end
+    
+    it "should be false when the instance has both of the two defined child record types" do
+      category = Category.create
+      category.posts << Post.new
+      category.comments << Comment.new
+      category.removable?.should == false
+    end
+  end
 end
