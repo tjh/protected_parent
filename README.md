@@ -37,7 +37,21 @@ Depending on taste, you can call protected_parent_of multiple times:
       protected_parent_of :attachment
     end
     
+When you need something more sophisticated, you can target a method or named_scope. This would block deletion of the category if there were any active posts:
 
+    class Category < ActiveRecord::Base
+      has_many :posts
+      protected_parent_of :active_posts
+      
+      def active_posts
+        posts.active
+      end
+    end
+    
+    class Post < ActiveRecord::Base
+      named_scope :active, :condition => { :active => true }
+    end
+    
 License
 -------
 Copyright (c) 2010 Tim Harvey, released under the MIT license
