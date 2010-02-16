@@ -29,7 +29,7 @@ module ProtectedParent
       true
     end
     
-    # The invense of removable?, is this instance protected from deletion?
+    # The inverse of removable?, is this instance protected from deletion?
     def protected?
       !removable?
     end
