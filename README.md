@@ -6,7 +6,10 @@ Stops the deletion of an ActiveRecord object when members of a specified child a
 It adds a "removeable?" method to evaluate whether the object may be deleted and the necessary before_destroy callback.
 
 Example Usage
--------------
+=============
+
+Adding to your models
+---------------------
 
 The model 'has_many :posts'. Do not allow deletion if there are Post records associated with this object:
     
@@ -51,7 +54,28 @@ When you need something more sophisticated, you can target a method or named_sco
     class Post < ActiveRecord::Base
       named_scope :active, :condition => { :active => true }
     end
+
+Using the methods
+-----------------
+
+Once applied to a model, protected_parent_of adds several methods to your model. You can now use 'protected?' and 'removable?'
+
+    category = Category.new
+    category.protected?                 # False
+    category.removable?                 # True
+
+    category = Category.new
+    category.posts << Post.create
+    category.protected?                 # True
+    category.removable?                 # False
+
+And most importantly, it will block deletion
+
+    category = Category.create
+    category.posts = Post.create
+    category.delete                     # False
+    category.delete!                    # Raises an exception
     
 License
--------
+=======
 Copyright (c) 2010 Tim Harvey, released under the MIT license
