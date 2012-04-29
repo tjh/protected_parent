@@ -76,6 +76,10 @@ And most importantly, it will block deletion
     category.delete                     # False
     category.delete!                    # Raises an exception
     
-License
-=======
-Copyright (c) 2010 Tim Harvey, released under the MIT license
+# License
+
+This code is [Uncopyrighted](http://mnmlist.com/uncopyright-and-a-minimalist-mindset/). Its author, Tim Harvey, has 
+released all claims on copyright and has put all the content of this code into the public domain.
+
+No permission is needed to copy, distribute, or modify the content of this code repository. Credit is appreciated 
+but not required.
